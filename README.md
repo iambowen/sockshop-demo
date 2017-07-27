@@ -8,12 +8,6 @@ It is built using [Spring Boot](http://projects.spring.io/spring-boot/), [Go kit
 
 You can read more about the [application design](./internal-docs/design.md).
 
-## Deployment Platforms
-
-The [deploy folder](./deploy/) contains scripts and instructions to provision the application onto your favourite platform. 
-
-Please let us know if there is a platform that you would like to see supported.
-
 ## Bugs, Feature Requests and Contributing
 
 We'd love to see community contributions. We like to keep it simple and use Github issues to track bugs and feature requests and pull requests to manage contributions. See the [contribution information](.github/CONTRIBUTING.md) for more information.
