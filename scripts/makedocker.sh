@@ -2,8 +2,8 @@
 #TARGET_VERSION=0.0.1                                                    ---------huawei cloud images repo save version.
 ORIGIN_VERSION=1.2.3-SNAPSHOT                                            #---------images version been made "mvn -Pdocker".
 #TENANT_NAME=xxxxxxxxxxx                                                 ---------huawei cloud tenant name.
-#REPO_ADDRESS=registry.cn-north-1.hwclouds.com                           ---------huawei cloud images repo address.
-REPO_ADDRESS=100.125.1.34:20202                                          #---------huawei cloud images repo address.
+REPO_ADDRESS=registry.cn-north-1.hwclouds.com                           #---------huawei cloud images repo address.
+#REPO_ADDRESS=100.125.1.34:20202                                          #---------huawei cloud images repo address.
 #USER_NAME=xxxxx                                                         ---------user name: login huawei cloud images repo.
 #PW=xxxxxxx                                                              ---------paasword: login huawei cloud images repo.
 #CUSTOMER_REPO_NAME=acmeair-customer                                     ---------customer repo name ,created by huawei cloud. 
@@ -11,7 +11,7 @@ REPO_ADDRESS=100.125.1.34:20202                                          #------
 #WEBSITE_REPO_NAME=acmeair-website                                       ---------website repo name ,created by huawei cloud. 
 
 
-export targetversion=0.0.1
+export targetversion=1.2.3
 #java docker build
 cd /opt/sockshop-demo/
 #mvn clean  install   -Dmaven.test.skip=true  -settings=/opt/tank/acmeair_settings.xml
@@ -54,7 +54,8 @@ docker tag sockshop-orders-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/socksh
 docker tag sockshop-shipping-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sockshop-shipping:$targetversion
 docker tag sockshop-queuemaster-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sockshop-queuemaster:$targetversion
 
-docker login -u cn-north-1@89WO1KDCRPKDMSGK4KQH -p 21071575be7dbfbc2cfc876141b422d8212509f50ab44346b880e72126565691 ${REPO_ADDRESS}
+#docker login -u cn-north-1@89WO1KDCRPKDMSGK4KQH -p 21071575be7dbfbc2cfc876141b422d8212509f50ab44346b880e72126565691 ${REPO_ADDRESS}
+docker login -u cn-north-1@CEOCLCHHQOZ602DRFQ5L -p 882d640dce0eb45cf833e7aad7f10aa8e5e22fe32ee2cc6fc7b2fd421f37f792 ${REPO_ADDRESS}
 
 docker push ${REPO_ADDRESS}/hwcse/sockshop-frontend:$targetversion
 docker push ${REPO_ADDRESS}/hwcse/sockshop-payment:$targetversion
