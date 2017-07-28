@@ -2,8 +2,8 @@
 #TARGET_VERSION=0.0.1                                                    ---------huawei cloud images repo save version.
 ORIGIN_VERSION=1.2.3-SNAPSHOT                                            #---------images version been made "mvn -Pdocker".
 #TENANT_NAME=xxxxxxxxxxx                                                 ---------huawei cloud tenant name.
-REPO_ADDRESS=registry.cn-north-1.hwclouds.com                           #---------huawei cloud images repo address.
-#REPO_ADDRESS=100.125.1.34:20202                                          #---------huawei cloud images repo address.
+#REPO_ADDRESS=registry.cn-north-1.hwclouds.com                           #---------huawei cloud images repo address.
+REPO_ADDRESS=100.125.1.34:20202                                          #---------huawei cloud images repo address.
 #USER_NAME=xxxxx                                                         ---------user name: login huawei cloud images repo.
 #PW=xxxxxxx                                                              ---------paasword: login huawei cloud images repo.
 #CUSTOMER_REPO_NAME=acmeair-customer                                     ---------customer repo name ,created by huawei cloud. 
