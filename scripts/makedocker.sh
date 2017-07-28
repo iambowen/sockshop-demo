@@ -33,8 +33,8 @@ cd /opt/sockshop-demo/queue-master/target/
 docker build -t sockshop-queuemaster-service:$ORIGIN_VERSION  . 
 
 #front-end docker build
-cd /opt/sockshop-demo/front-end/
-docker build -t sockshop-frontend-service:$ORIGIN_VERSION .
+#cd /opt/sockshop-demo/front-end/
+#docker build -t sockshop-frontend-service:$ORIGIN_VERSION .
 
 #Go microservice build
 cd /opt/sockshop-demo/payment/
@@ -45,7 +45,7 @@ cd /opt/sockshop-demo/catalogue/
 docker build -t sockshop-catalogue-service:$ORIGIN_VERSION .
 
 #docker tag/push
-docker tag sockshop-frontend-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sockshop-frontend:$targetversion
+#docker tag sockshop-frontend-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sockshop-frontend:$targetversion
 docker tag sockshop-payment-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sockshop-payment:$targetversion
 docker tag sockshop-user-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sockshop-user:$targetversion
 docker tag sockshop-catalogue-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sockshop-cat:$targetversion
@@ -57,7 +57,7 @@ docker tag sockshop-queuemaster-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/s
 #docker login -u cn-north-1@89WO1KDCRPKDMSGK4KQH -p 21071575be7dbfbc2cfc876141b422d8212509f50ab44346b880e72126565691 ${REPO_ADDRESS}
 docker login -u cn-north-1@CEOCLCHHQOZ602DRFQ5L -p 882d640dce0eb45cf833e7aad7f10aa8e5e22fe32ee2cc6fc7b2fd421f37f792 ${REPO_ADDRESS}
 
-docker push ${REPO_ADDRESS}/hwcse/sockshop-frontend:$targetversion
+#docker push ${REPO_ADDRESS}/hwcse/sockshop-frontend:$targetversion
 docker push ${REPO_ADDRESS}/hwcse/sockshop-payment:$targetversion
 docker push ${REPO_ADDRESS}/hwcse/sockshop-user:$targetversion
 docker push ${REPO_ADDRESS}/hwcse/sockshop-cat:$targetversion
