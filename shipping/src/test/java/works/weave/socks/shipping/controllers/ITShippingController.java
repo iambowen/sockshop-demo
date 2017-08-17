@@ -1,4 +1,4 @@
-package works.weave.socks.shipping.controllers;
+/*package works.weave.socks.shipping.controllers;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,3 +67,4 @@ public class ITShippingController {
         assertThat(original, is(equalTo(saved)));
     }
 }
+*/
