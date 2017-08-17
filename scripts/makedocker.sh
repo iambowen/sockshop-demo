@@ -55,7 +55,8 @@ docker tag sockshop-shipping-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sock
 docker tag sockshop-queuemaster-service:$ORIGIN_VERSION  ${REPO_ADDRESS}/hwcse/sockshop-queuemaster:$targetversion
 
 #docker login -u cn-north-1@89WO1KDCRPKDMSGK4KQH -p 21071575be7dbfbc2cfc876141b422d8212509f50ab44346b880e72126565691 ${REPO_ADDRESS}
-docker login -u cn-north-1@CEOCLCHHQOZ602DRFQ5L -p 882d640dce0eb45cf833e7aad7f10aa8e5e22fe32ee2cc6fc7b2fd421f37f792 ${REPO_ADDRESS}
+#docker login -u cn-north-1@CEOCLCHHQOZ602DRFQ5L -p 882d640dce0eb45cf833e7aad7f10aa8e5e22fe32ee2cc6fc7b2fd421f37f792 ${REPO_ADDRESS}
+docker login -u cn-north-1@EDV0PE1TVESJ0Z9SFMV0 -p 68f44f4122fd4cbe5ba4e30909a56854d7836adc7465a60316fd2b3b9e60bbe3 ${REPO_ADDRESS}
 
 #docker push ${REPO_ADDRESS}/hwcse/sockshop-frontend:$targetversion
 docker push ${REPO_ADDRESS}/hwcse/sockshop-payment:$targetversion
