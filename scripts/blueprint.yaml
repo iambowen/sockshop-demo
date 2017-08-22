@@ -213,11 +213,11 @@ node_templates:
               targetPort: 7091
         resource_spec:
           request:
-            cpu: 500
+            cpu: 500m
             memory: 512Mi
           limit:
-            cpu: 1000m
-            memory: 1024Mi
+            cpu: 2000m
+            memory: 2048Mi
         volumes:
           - name: localtime
             mountpath: /etc/localtime
