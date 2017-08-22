@@ -15,6 +15,7 @@ export targetversion=1.2.3
 #java docker build
 cd /opt/sockshop-demo/
 #mvn clean  install   -Dmaven.test.skip=true  -settings=/opt/tank/acmeair_settings.xml
+mvn install:install-file -Dfile=libs/java-sdk-core-2.0.1.jar -DgroupId=java-sdk-core -DartifactId=java-sdk-core -Dversion=2.0.1 -Dpackaging=jar
 mvn clean install -Phuaweicloud -Dmaven.test.skip=true
 cd /opt/sockshop-demo/makedocker
 
