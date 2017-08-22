@@ -21,6 +21,16 @@ cse:
         default: bizkeeper-provider,perf-stats
       Consumer:
         default: loadbalance,bizkeeper-consumer,perf-stats
+  dms:
+    service:
+      endpoint:
+        url: https://dms.cn-north-1.myhwclouds.com/v1.0/
+      region: cn-north-1
+      serviceName: paas
+      ak: EDV0PE1TVESJ0Z9SFMV0
+      sk: 82ldOxAc8keg3pbW7pXQbgSRLR5VO4RRBhxhbLKN
+      projectId: 7cb17735924d48c7b98a255edfbd49bc
+  
 
 ssl.sc.consumer.sslOptionFactory: com.huawei.paas.foundation.auth.SSLOptionFactoryCloud
 ssl.apiserver.consumer.sslOptionFactory: com.huawei.paas.foundation.auth.SSLOptionFactoryCloud 
