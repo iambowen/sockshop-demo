@@ -11,6 +11,7 @@
         http = require('http'),
         https = require('https'),
         serviceCenterIp = process.env.SC_HOST,
+        //serviceCenterIp = '100.125.1.34',
         fs = require('fs'),
         serviceCenterPort = '30100';
     var options1 = {
@@ -21,7 +22,12 @@
     };
 
     var headerObj
-    var basePath = "/var/run/secrets/kubernetes.io/serviceaccount"; var url = ""; fs.readFile(basePath + '/namespace', 'utf8', function (err, data) {
+    //var userUrl = process.env.USER_SERVICE_HOST + ":" + process.env.USER_SERVICE_PORT; 
+    //var catalogueUrl = process.env.CATALOGUE_SERVICE_HOST + ":" + process.env.CATALOGUE_SERVICE_PORT; 
+    var basePath = "/var/run/secrets/kubernetes.io/serviceaccount"; 
+	var url = ""; 
+	
+	fs.readFile(basePath + '/namespace', 'utf8', function (err, data) {
         if (err) { return console.log(err); } var namespace = data;
 
         fs.readFile(basePath + '/token', 'utf8', function (err, data) {
@@ -85,6 +91,7 @@
     });
     var getServiceCenterInstances = function (response) {
         console.log("Inside getServiceCenterInstances() ");
+        //	console.log("https response is --> ", response);
         var str = '';
         response.on('data', function (chunk) {
             str += chunk;
@@ -93,20 +100,24 @@
             var services = JSON.parse(str).services;
             var serviceDtls = [];
             for (var i = 0; i < services.length; i++) {
-                console.log("Inside for loop services[i].serviceName.toLowerCase() !== 'servicecenter'", services[i].serviceName.toLowerCase() !== 'servicecenter', services[i].serviceName.toLowerCase());
-                if (services[i].serviceName.toLowerCase() !== 'servicecenter') {
-                    var curHeaders = headerObj;
-                    curHeaders['X-consumerId'] = serviceId
-                    curHeaders['serviceName'] = services[i].serviceName
-                    var api = {
-                        host: serviceCenterIp,
-                        path: '/registry/v3/microservices/' + services[i].serviceId + '/instances',
-                        port: serviceCenterPort,
-                        rejectUnauthorized: false,
-                        headers: curHeaders
-                    };
-                    https.request(api, getEndpoints).end();
-                }
+                if(services[i].serviceName.toLowerCase() == "orders"){
+                    console.log("got orders service name")
+                    console.log("Inside for loop services[i].serviceName.toLowerCase() !== 'servicecenter'", services[i].serviceName.toLowerCase() !== 'servicecenter', services[i].serviceName.toLowerCase());
+                    if (services[i].serviceName.toLowerCase() !== 'servicecenter') {
+                        var curHeaders = headerObj;
+                        curHeaders['X-consumerId'] = serviceId
+                        curHeaders['serviceName'] = services[i].serviceName
+                        var api = {
+                            host: serviceCenterIp,
+                            path: '/registry/v3/microservices/' + services[i].serviceId + '/instances',
+                            port: serviceCenterPort,
+                            rejectUnauthorized: false,
+                            headers: curHeaders
+                        };
+                        https.request(api, getEndpoints).end();
+                    }
+                } 
+
             }
         });
 
@@ -224,28 +235,21 @@
             try {
                 console.log("Inside getEndpoints function with the response", str)
                 var instance = JSON.parse(str).instances[0];
-                var url = JSON.parse(str).instances[0].endpoints[0].toString().replace("rest", "http");
+				var endPoints = JSON.parse(str).instances[0].endpoints;
+				for (var i = 0; i < endPoints.length; i++){
+                                     console.log("in for loop for endpoint check "+endPoints[i])	
+					if(endPoints[i].toString().indexOf("rest") != -1){
+						var url = endPoints[i].toString().replace("rest", "http");
+						console.log("==================> in rest check : ",url);
+					}
+                                                                               
+					
+				}
+                //var url = JSON.parse(str).instances[0].endpoints[0].toString().replace("rest", "http");
                 console.log("getEndpoiints url --> ", url, "response.req._headers.servicename + Url", response.req._headers.servicename + "Url");
                 module.exports[response.req._headers.servicename + "Url"] = util.format(url + "/" + response.req._headers.servicename);
                 if (response.req._headers.servicename == "orders" || response.req._headers.servicename == "orders") {
                     module.exports["ordersUrl"] = util.format(url);
-                }
-                if (response.req._headers.servicename == "cart" || response.req._headers.servicename == "carts") {
-                    console.log("cart found in service center");
-                    module.exports["cartsUrl"] = util.format(url + "/" + response.req._headers.servicename);
-                }
-                if (response.req._headers.servicename == "catalogue") {
-                    console.log("catalogue found in service center");
-                    module.exports["catalogueUrl"] = util.format(url);
-                    module.exports["tagsUrl"] = util.format(url + "/");
-                }
-                if (response.req._headers.servicename == "user") {
-                    console.log("user found in service Center");
-                    module.exports["customersUrl"] = util.format(url + "/customers");
-                    module.exports["addressUrl"] = util.format(url + "/addresses");
-                    module.exports["cardsUrl"] = util.format(url + "/cards");
-                    module.exports["loginUrl"] = util.format(url + "/login");
-                    module.exports["registerUrl"] = util.format(url + "/register");
                 }
                 console.log("getEndpoints try block--> ", module.exports);
             } catch (error) {
@@ -255,7 +259,6 @@
         });
     }
     console.log("About to call the dumb API version2.0.0 ");
-    
-    module.exports = {     
-    };
+    //http.request(options, getServiceCenterInstances).end();
+
 }());
