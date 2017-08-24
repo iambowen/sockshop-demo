@@ -20,6 +20,11 @@ cse:
         default: bizkeeper-provider,perf-stats
       Consumer:
         default: loadbalance,bizkeeper-consumer,perf-stats
+  loadbalance:
+    serverListFilters: darklaunch
+    serverListFilter:
+      darklaunch:
+        className: com.huawei.paas.darklaunch.DarklaunchServerListFilter
   references: 
     shipping: 
       version-rule: 0.0.1+ 
