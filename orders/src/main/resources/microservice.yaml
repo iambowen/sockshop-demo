@@ -6,15 +6,14 @@ cse:
   service:
     registry:
       address: https://${SC_HOST}:30100
+  config:
+    client:
+      serverUri: https://${SC_HOST}:30103
   monitor:
     client:
       serverUri: https://${SC_HOST}:30109
   rest:
     address: 0.0.0.0:7071
-  grpc:
-    address: 0.0.0.0:9090
-  highway:
-    address: 0.0.0.0:7070?sslEnabled=false
   handler:
     chain:
       Provider:
@@ -25,7 +24,9 @@ cse:
     shipping: 
       version-rule: 0.0.1+ 
       transport: highway
- 
+    payment: 
+      version-rule: 0.0.1+ 
+      transport: rest
 ssl.sc.consumer.sslOptionFactory: com.huawei.paas.foundation.auth.SSLOptionFactoryCloud
 ssl.apiserver.consumer.sslOptionFactory: com.huawei.paas.foundation.auth.SSLOptionFactoryCloud
 ssl.monitor.consumer.sslOptionFactory: com.huawei.paas.foundation.auth.SSLOptionFactoryCloud    

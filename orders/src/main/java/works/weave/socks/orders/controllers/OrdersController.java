@@ -45,16 +45,15 @@ import works.weave.socks.orders.services.AsyncGetService;
 import works.weave.socks.orders.values.PaymentRequest;
 import works.weave.socks.orders.values.PaymentResponse;
 import org.springframework.web.client.RestTemplate;
+
 @RepositoryRestController
 @RestSchema(schemaId = "orders")
 @RequestMapping(path = "/orders")
 public class OrdersController {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
-    private static RestTemplate restTemplate;
 
-    @Autowired
-    private OrdersConfigurationProperties config;
+    private static RestTemplate restTemplate;
 
     @Autowired
     private AsyncGetService asyncGetService;
@@ -75,6 +74,7 @@ public class OrdersController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public @ResponseBody CustomerOrder newOrder(@RequestBody NewOrderResource item) {
+       
         try {
             if (item.address == null || item.customer == null || item.card == null || item.items == null) {
                 throw new InvalidOrderException(
@@ -85,7 +85,7 @@ public class OrdersController {
             LOG.info(item.address.getPath());
             LOG.info(item.customer.getPath());
             LOG.info(item.card.getPath());
-            LOG.info(item.items.getPath());
+            LOG.info(item.items.toString());
             Future<Resource<Address>> addressFuture =
                 asyncGetService.getResource(item.address, new TypeReferences.ResourceType<Address>() {
                 });
@@ -98,93 +98,31 @@ public class OrdersController {
                 asyncGetService.getResource(item.card, new TypeReferences.ResourceType<Card>() {
                 });
 
-            Future<List<Item>> itemsFuture =
-                asyncGetService.getDataList(item.items, new ParameterizedTypeReference<List<Item>>() {
-                });
-
             LOG.info("End of calls.");
 
-            float amount = calculateTotal(itemsFuture.get(timeout, TimeUnit.SECONDS));
+            float amount = calculateTotal(item.items);
 
             LOG.info("amount :" + amount);
-            // payment
-            String shippingUri = null;
-            String paymentUri = null;
-            ServiceRegistryClient client = RegistryUtils.getServiceRegistryClient();
-            List<Microservice> services = client.getAllMicroservices();
-            for (Microservice service : services) {
-                String name = service.getServiceName();
-                if (name.equalsIgnoreCase("shipping")) {
-                    String appId = service.getAppId();
-                    String cseServiceID = client.getMicroserviceId(appId, name, "0.0.1");
-                    List<MicroserviceInstance> instances = client.getMicroserviceInstance(cseServiceID, cseServiceID);
-                    if (null != instances && !instances.isEmpty()) {
-                        for (MicroserviceInstance instance : instances) {
-                            List<String> eps = instance.getEndpoints();
-                            for (String ep : eps) {
-                                if (ep.startsWith("rest")) {
-                                    shippingUri = ep.substring(7);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                } else if (name.equalsIgnoreCase("payment")) {
-                    String appId = service.getAppId();
-                    String cseServiceID = client.getMicroserviceId(appId, name, "0.0.1");
-                    List<MicroserviceInstance> instances = client.getMicroserviceInstance(cseServiceID, cseServiceID);
-                    if (null != instances && !instances.isEmpty()) {
-                        for (MicroserviceInstance instance : instances) {
-                            List<String> eps = instance.getEndpoints();
-                            for (String ep : eps) {
-                                if (ep.startsWith("rest")) {
-                                    paymentUri = ep.substring(7);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            // Call payment service to make sure they've paid
-            PaymentRequest paymentRequest = new PaymentRequest(
-                    addressFuture.get(timeout, TimeUnit.SECONDS).getContent(),
-                    cardFuture.get(timeout, TimeUnit.SECONDS).getContent(),
-                    customerFuture.get(timeout, TimeUnit.SECONDS).getContent(),
-                    amount);
 
-            Future<PaymentResponse> paymentFuture = asyncGetService.postResource(
-                    config.getPaymentUri(paymentUri),
-                    paymentRequest,
-                    new ParameterizedTypeReference<PaymentResponse>() {
-                    });
-            PaymentResponse paymentResponse = paymentFuture.get(timeout, TimeUnit.SECONDS);
-
-            if (paymentResponse == null) {
-                throw new PaymentDeclinedException("Unable to parse authorisation packet");
-            }
-            if (!paymentResponse.isAuthorised()) {
-                throw new PaymentDeclinedException(paymentResponse.getMessage());
-            }
-
-            String customerId = parseId(customerFuture.get(timeout, TimeUnit.SECONDS).getId().getHref());
-            /*Future<Shipment> shipmentFuture = asyncGetService.postResource(config.getShippingUri(shippingUri),
-                    new Shipment(customerId),
-                    new ParameterizedTypeReference<Shipment>() {
-                    }); */
-            //highway
+            //payment
+            PaymentRequest paymentRequest = new PaymentRequest(amount);
             restTemplate = RestTemplateBuilder.create();
-            String prefix = "cse://shipping";           
-            Shipment shippment = restTemplate.postForObject(prefix + "/shipping", new Shipment(customerId), Shipment.class);
-            Future<Shipment> shipmentFuture = new AsyncResult<>(shippment);
+            String prefixx = "cse://payment";
+            restTemplate.postForObject(prefixx + "/paymentAuth", paymentRequest, PaymentResponse.class);
 
+            //shipping
+            String customerId = parseId(customerFuture.get(timeout, TimeUnit.SECONDS).getId().getHref());
+            String prefix = "cse://shipping";
+            Shipment shippment =
+                restTemplate.postForObject(prefix + "/shipping", new Shipment(customerId), Shipment.class);
+            Future<Shipment> shipmentFuture = new AsyncResult<>(shippment);
             CustomerOrder order = new CustomerOrder(
                     null,
                     customerId,
                     customerFuture.get(timeout, TimeUnit.SECONDS).getContent(),
                     addressFuture.get(timeout, TimeUnit.SECONDS).getContent(),
                     cardFuture.get(timeout, TimeUnit.SECONDS).getContent(),
-                    itemsFuture.get(timeout, TimeUnit.SECONDS),
+                    item.items,
                     shipmentFuture.get(timeout, TimeUnit.SECONDS),
                     Calendar.getInstance().getTime(),
                     amount);

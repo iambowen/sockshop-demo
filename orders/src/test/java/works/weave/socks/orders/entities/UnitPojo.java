@@ -1,4 +1,4 @@
-package works.weave.socks.orders.entities;
+/*package works.weave.socks.orders.entities;
 
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.PojoClassFilter;
@@ -52,3 +52,4 @@ public class UnitPojo {
         validator.validate(POJO_PACKAGE, filter);
     }
 }
+*/

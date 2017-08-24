@@ -10,12 +10,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-// curl -XPOST -H 'Content-type: application/json' http://localhost:8082/orders -d '{"customer":
-// "http://localhost:8080/customer/1", "address": "http://localhost:8080/address/1", "card":
-// "http://localhost:8080/card/1", "items": "http://localhost:8081/carts/1/items"}'
-
-// curl http://localhost:8082/orders/search/customerId\?custId\=1
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Document
 public class CustomerOrder {

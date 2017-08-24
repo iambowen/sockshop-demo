@@ -1,8 +1,11 @@
 package works.weave.socks.orders.resources;
 
+import java.net.URI;
+import java.util.List;
+
 import org.hibernate.validator.constraints.URL;
 
-import java.net.URI;
+import works.weave.socks.orders.entities.Item;
 
 public class NewOrderResource {
     @URL
@@ -14,6 +17,5 @@ public class NewOrderResource {
     @URL
     public URI card;
 
-    @URL
-    public URI items;
+    public List<Item> items;
 }
