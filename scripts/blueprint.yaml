@@ -1,4 +1,4 @@
-tosca_definitions_version: hwpaas_tosca_version_1_4_1
+tosca_definitions_version: hwpaas_tosca_version_1_4_1
 
 inputs:
   image-frontend:
@@ -206,7 +206,10 @@ node_templates:
           node: cse-resolv-volume
           relationship: hwpaas.relationships.AttachesTo
       - dependency:
-          node: shipping-app
+          node: shippingv1-app
+          relationship: hwpaas.relationships.ConnectsTo
+      - dependency:
+          node: shippingv2-app
           relationship: hwpaas.relationships.ConnectsTo
       - dependency:
           node: payment-app
