@@ -69,6 +69,8 @@ inputs:
     default: "82ldOxAc8keg3pbW7pXQbgSRLR5VO4RRBhxhbLKN"
   dms_projectid:
     default: "7cb17735924d48c7b98a255edfbd49bc"
+  chassis_stage:
+    default: "prod"
 
 node_templates:
   cse-localtime-volume:
@@ -608,6 +610,8 @@ node_templates:
         env:
           - name: "SC_HOST"
             value: { get_input: sc_host }
+          - name: "CHASSIS_STAGE"
+            value: { get_input: chassis_stage }
         container_spec:
           image: { get_input: image-servmesh }
         service_spec:
