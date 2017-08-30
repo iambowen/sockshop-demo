@@ -71,6 +71,12 @@ inputs:
     default: "7cb17735924d48c7b98a255edfbd49bc"
   chassis_stage:
     default: "prod"
+  cse_service_reg_enable:
+    default: "true"
+  cse_reg_addr:
+    default: "100.125.1.34:30100"
+  cse_center_addr:
+    default: "100.125.1.34:30103"
 
 node_templates:
   cse-localtime-volume:
@@ -475,6 +481,8 @@ node_templates:
             value: mongodb
           - name: "SC_HOST"
             value: { get_input: sc_host }
+          - name: "CHASSIS_STAGE"
+            value: { get_input: chassis_stage }
         container_spec:
           image: { get_input: image-user }
         service_spec:
@@ -520,6 +528,8 @@ node_templates:
         env:
           - name: "SC_HOST"
             value: { get_input: sc_host }
+          - name: "CHASSIS_STAGE"
+            value: { get_input: chassis_stage }
         service_spec:
           type: ClusterIP
           ports:
@@ -569,6 +579,8 @@ node_templates:
         env:
           - name: "SC_HOST"
             value: { get_input: sc_host }
+          - name: "CHASSIS_STAGE"
+            value: { get_input: chassis_stage }
         service_spec:
           type: ClusterIP
           ports:
@@ -612,6 +624,12 @@ node_templates:
             value: { get_input: sc_host }
           - name: "CHASSIS_STAGE"
             value: { get_input: chassis_stage }
+          - name: "CSE_REGISTRY_ADDR"
+            value: { get_input: cse_reg_addr }
+          - name: "cse_service_registry_sslEnable"
+            value: { get_input: cse_service_reg_enable }
+          - name: "CSE_CONFIG_CENTER_ADDR"
+            value: { get_input: cse_center_addr }
         container_spec:
           image: { get_input: image-servmesh }
         service_spec:
