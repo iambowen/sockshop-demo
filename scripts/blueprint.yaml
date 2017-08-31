@@ -623,57 +623,7 @@ node_templates:
           - name: resolv
             mountpath: /etc/resolv.conf
             readOnly: true
-  #servmesher
-  servmesher-app:
-    type: hwpaas.nodes.Application
-    properties:
-      type: container
-      name: { get_input: servmesher_name }
-    requirements:
-      - host:
-          node: bptest-host
-          relationship: hwpaas.relationships.HostedOn
-      - package:
-          node: servmesher
-          relationship: hwpaas.relationships.PackageConsistsOf
-      - volume:
-          node: cse-localtime-volume
-          relationship: hwpaas.relationships.AttachesTo
-      - volume:
-          node: cse-resolv-volume
-          relationship: hwpaas.relationships.AttachesTo
 
-  servmesher:
-    type: hwpaas.nodes.SoftwareComponent
-    properties:
-      package:
-        package_type: container
-        env:
-          - name: "SC_HOST"
-            value: { get_input: sc_host }
-          - name: "CHASSIS_STAGE"
-            value: { get_input: chassis_stage }
-          - name: "CSE_REGISTRY_ADDR"
-            value: { get_input: cse_reg_addr }
-          - name: "cse_service_registry_sslEnable"
-            value: { get_input: cse_service_reg_enable }
-          - name: "CSE_CONFIG_CENTER_ADDR"
-            value: { get_input: cse_center_addr }
-        container_spec:
-          image: { get_input: image-servmesh }
-        service_spec:
-          type: ClusterIP
-          ports:
-            - port: 30101
-              name: servmesherport
-              targetPort: 30101
-        volumes:
-          - name: localtime
-            mountpath: /etc/localtime
-            readOnly: true
-          - name: resolv
-            mountpath: /etc/resolv.conf
-            readOnly: true
   #mongodb-users
   mongodb-users-app:
     type: hwpaas.nodes.Application
