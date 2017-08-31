@@ -58,16 +58,16 @@ public class UnitPojo {
 
     @Test
     public void testEquals() throws Exception {
-        assertThat(new Shipment("id", "name"), is(equalTo(new Shipment("id", "name"))));
-        assertThat(new Shipment("id", "name"), is(equalTo(new Shipment("id", "another"))));
-        assertThat(new Shipment("id", "name"), is(not(equalTo(new Shipment("another", "name")))));
+        assertThat(new Shipment("id", "name",4.99F), is(equalTo(new Shipment("id", "name",4.99F))));
+        assertThat(new Shipment("id", "name",4.99F), is(equalTo(new Shipment("id", "another",4.99F))));
+        assertThat(new Shipment("id", "name",4.99F), is(not(equalTo(new Shipment("another", "name",4.99F)))));
     }
 
     @Test
     public void testHashcode() throws Exception {
-        assertThat(new Shipment("id", "name").hashCode(), is(equalTo(new Shipment("id", "name").hashCode())));
-        assertThat(new Shipment("id", "name").hashCode(), is(equalTo(new Shipment("id", "another").hashCode())));
-        assertThat(new Shipment("id", "name").hashCode(), is(not(equalTo(new Shipment("aa", "name").hashCode()))));
+        assertThat(new Shipment("id", "name",4.99F).hashCode(), is(equalTo(new Shipment("id", "name",4.99F).hashCode())));
+        assertThat(new Shipment("id", "name",4.99F).hashCode(), is(equalTo(new Shipment("id", "another",4.99F).hashCode())));
+        assertThat(new Shipment("id", "name",4.99F).hashCode(), is(not(equalTo(new Shipment("aa", "name",4.99F).hashCode()))));
     }
 
     @Test

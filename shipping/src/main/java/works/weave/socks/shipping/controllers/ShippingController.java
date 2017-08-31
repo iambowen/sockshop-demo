@@ -80,9 +80,9 @@ public class ShippingController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody Shipment postShipping(@RequestBody Shipment shipment) {
-        System.out.println("Adding shipment to queue...");
+    @RequestMapping(path = "/{username}", method = RequestMethod.POST)
+    public @ResponseBody Shipment postShipping(@RequestBody Shipment shipment,@PathVariable("username") String username) {
+        System.out.println("Adding shipment to queue..."+username);
     /*    try {
             rabbitTemplate.convertAndSend("shipping-task", shipment);
         } catch (Exception e) {
@@ -96,6 +96,7 @@ public class ShippingController {
         if (!bResult) {
             System.out.println("Some problem happend while adding to queue, Anyway accespting order");
         }
+        shipment.setAmount((float) 4.99);
         return shipment;
     }
 

@@ -1,11 +1,14 @@
 APPLICATION_ID: sockshop
 service_description:
   name: shipping
-  version: 0.0.1
+  version: 0.0.2
 cse:
   service:
     registry:
       address: https://${SC_HOST}:30100
+  config:
+    client:
+      serverUri: https://${SC_HOST}:30103
   monitor:
     client:
       serverUri: https://${SC_HOST}:30109
@@ -21,15 +24,20 @@ cse:
         default: bizkeeper-provider,perf-stats
       Consumer:
         default: loadbalance,bizkeeper-consumer,perf-stats
+  loadbalance:
+    serverListFilters: darklaunch
+    serverListFilter:
+      darklaunch:
+        className: com.huawei.paas.darklaunch.DarklaunchServerListFilter
   dms:
     service:
       endpoint:
-        url: https://dms.cn-north-1.myhwclouds.com/v1.0/
-      region: cn-north-1
+        url: https://${DMS_HOST}
+      region: ${DMS_REGION}
       serviceName: paas
-      ak: EDV0PE1TVESJ0Z9SFMV0
-      sk: 82ldOxAc8keg3pbW7pXQbgSRLR5VO4RRBhxhbLKN
-      projectId: 7cb17735924d48c7b98a255edfbd49bc
+      ak: ${DMS_AK}
+      sk: ${DMS_SK}
+      projectId: ${DMS_PROJECTID}
   
 
 ssl.sc.consumer.sslOptionFactory: com.huawei.paas.foundation.auth.SSLOptionFactoryCloud

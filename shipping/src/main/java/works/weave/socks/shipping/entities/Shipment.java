@@ -6,18 +6,21 @@ public class Shipment {
     private String id;
 
     private String name;
+    
+    private float amount;
 
     public Shipment() {
         this("");
     }
 
     public Shipment(String name) {
-        this(UUID.randomUUID().toString(), name);
+        this(UUID.randomUUID().toString(), name,4.99F);
     }
 
-    public Shipment(String id, String name) {
+    public Shipment(String id, String name, float amount) {
         this.id = id;
         this.name = name;
+        this.amount = amount;
     }
 
     @Override
@@ -25,7 +28,8 @@ public class Shipment {
         return "Shipment{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                '}';
+                ",amount='" + amount +
+                '\'' +'}';
     }
 
     @Override
@@ -61,4 +65,12 @@ public class Shipment {
     public void setName(String name) {
         this.name = name;
     }
+
+	public float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
 }
