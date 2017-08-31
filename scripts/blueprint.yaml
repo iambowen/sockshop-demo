@@ -71,12 +71,16 @@ inputs:
     default: "7cb17735924d48c7b98a255edfbd49bc"
   chassis_stage:
     default: "prod"
-  cse_service_reg_enable:
-    default: "true"
+  chassis_env:
+    default: "prod"
   cse_reg_addr:
-    default: "100.125.1.34:30100"
+    default: "https://100.125.1.34:30100"
   cse_center_addr:
-    default: "100.125.1.34:30103"
+    default: "https://100.125.1.34:30103"
+  mode:
+    default: "sidecar"
+  servicemesh_ip:
+    default: "http://0.0.0.0:30101"
 
 node_templates:
   cse-localtime-volume:
@@ -131,9 +135,6 @@ node_templates:
           node: catalogue-app
           relationship: hwpaas.relationships.ConsistsOf
       - member:
-          node: servmesher-app
-          relationship: hwpaas.relationships.ConsistsOf
-      - member:
           node: mongodb-users-app
           relationship: hwpaas.relationships.ConsistsOf
       - member:
@@ -184,6 +185,10 @@ node_templates:
         env:
           - name: "SC_HOST"
             value: { get_input: sc_host }
+          - name: "MODE"
+            value: { get_input: mode }
+          - name: "SERVICE_MESH_IP"
+            value: { get_input: servicemesh_ip }
         service_spec:
           type: NodePort
           ports:
@@ -193,6 +198,30 @@ node_templates:
         volumes:
           - name: localtime
             mountpath: /etc/localtime
+            readOnly: true
+      package:
+        package_type: container
+        env:
+          - name: "CHASSIS_ENV"
+            value: { get_input: chassis_env }
+          - name: "CSE_REGISTRY_ADDR"
+            value: { get_input: cse_reg_addr }
+          - name: "CSE_CONFIG_CENTER_ADDR"
+            value: { get_input: cse_center_addr }
+        container_spec:
+          image: { get_input: image-servmesh }
+        service_spec:
+          type: ClusterIP
+          ports:
+            - port: 30101
+              name: servmesherport
+              targetPort: 30101
+        volumes:
+          - name: localtime
+            mountpath: /etc/localtime
+            readOnly: true
+          - name: resolv
+            mountpath: /etc/resolv.conf
             readOnly: true
   #orders
   orders-app:
