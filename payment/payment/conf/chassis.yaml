@@ -8,12 +8,20 @@ cse:
     strategyName: RoundRobin
   service:
     registry:
+      type: servicecenter
       address: 0.0.0.0:30100   #this will get from evn variable.
       enableSSL: true
       #register: manual          optional：register不配置时默认为自动注册，可选参数有自动注册auto和手动注册manual
       refeshInterval : 30s
       watch: true
       tenant: default
+  monitor:
+    client:
+      serverUri: https://0.0.0.0:30109
+      enable: true
+      userName: weixing
+      domainName: default
+      
   protocols:
     rest:
       listenAddress: 0.0.0.0:8082
@@ -39,7 +47,7 @@ ssl:
   registry.consumer.cipherPlugin: default
   registry.consumer.verifyPeer: false
   #registry.consumer.verifyCN: 
-  registry.consumer.cipherSuits: TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+  registry.consumer.cipherSuits: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
   test.consumer.protocol: TLSv1.2
   test.consumer.caFile:
   test.consumer.certFile:
@@ -47,5 +55,13 @@ ssl:
   test.consumer.certPwdFile:
 
 
+  monitor.consumer.cipherPlugin: default
+  monitor.consumer.verifyPeer: false
+  monitor.consumer.cipherSuits: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+  monitor.consumer.protocol: TLSv1.2
+  monitor.consumer.caFile:
+  monitor.consumer.certFile:
+  monitor.consumer.keyFile:
+  monitor.consumer.certPwdFile:
 
 
