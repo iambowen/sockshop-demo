@@ -18,4 +18,6 @@ public class NewOrderResource {
     public URI card;
 
     public List<Item> items;
+
+    public String customerId;
 }

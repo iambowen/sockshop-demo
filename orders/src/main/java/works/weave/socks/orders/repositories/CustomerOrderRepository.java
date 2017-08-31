@@ -12,4 +12,7 @@ import java.util.List;
 public interface CustomerOrderRepository extends MongoRepository<CustomerOrder, String> {
     @RestResource(path = "customerId")
     List<CustomerOrder> findByCustomerId(@Param("custId") String id);
+    
+    @RestResource(path = "id")
+    CustomerOrder findById(@Param("orderId") String id);
 }

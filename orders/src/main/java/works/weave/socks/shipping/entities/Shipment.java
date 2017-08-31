@@ -6,6 +6,8 @@ public class Shipment {
     private String id;
 
     private String name;
+    
+    private float amount;
 
     public Shipment() {
         this("");
@@ -25,7 +27,8 @@ public class Shipment {
         return "Shipment{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                '}';
+                ",amount='" + amount +
+                '\'' +'}';
     }
 
     @Override
@@ -61,4 +64,13 @@ public class Shipment {
     public void setName(String name) {
         this.name = name;
     }
+
+	public float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
 }
+
