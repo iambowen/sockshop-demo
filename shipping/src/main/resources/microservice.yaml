@@ -1,7 +1,7 @@
 APPLICATION_ID: sockshop
 service_description:
   name: shipping
-  version: 0.0.2
+  version: 0.0.1
 cse:
   service:
     registry:
