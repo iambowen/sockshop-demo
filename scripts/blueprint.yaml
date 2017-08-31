@@ -2,9 +2,9 @@ tosca_definitions_version: hwpaas_tosca_version_1_4_1
 
 inputs:
   image-frontend:
-    default: "100.125.1.34:20202/hwcse/sockshop-frontend:0.2.16"
+    default: "100.125.1.34:20202/hwcse/sockshop-frontend:0.2.33"
   image-orders:
-    default: "100.125.1.34:20202/hwcse/sockshop-orders:113.113.0"
+    default: "100.125.1.34:20202/hwcse/sockshop-orders:115.115.0"
   image-payment:
     default: "100.125.1.34:20202/hwcse/sockshop-payment:6.6.17"
   image-user:
