@@ -582,6 +582,8 @@ node_templates:
             value: { get_input: sc_host }
           - name: "CHASSIS_STAGE"
             value: { get_input: chassis_stage }
+          - name: "CHASSIS_ENV"
+            value: { get_input: chassis_env }
         service_spec:
           type: ClusterIP
           ports:
