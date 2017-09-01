@@ -18,7 +18,7 @@ inputs:
   image-catalogue:
     default: "100.125.1.34:20202/hwcse/sockshop-cat:3.2.3"
   image-servmesh:
-    default: "100.125.1.34:20202/hwcse/sockshop-servmesh:0.0.11"
+    default: "100.125.1.34:20202/hwcse/sockshop-servmesh:0.0.111"
   image-queuemaster:
     default: "100.125.1.34:20202/hwcse/sockshop-queuemaster:7.8.9"
   image-mongodb-orders:
@@ -71,12 +71,14 @@ inputs:
     default: "7cb17735924d48c7b98a255edfbd49bc"
   chassis_stage:
     default: "prod"
+  chassis_env:
+    default: "prod"
   cse_service_reg_enable:
     default: "true"
   cse_reg_addr:
-    default: "100.125.1.34:30100"
+    default: "https://100.125.1.34:30100"
   cse_center_addr:
-    default: "100.125.1.34:30103"
+    default: "https://100.125.1.34:30103"
 
 node_templates:
   cse-localtime-volume:
@@ -524,12 +526,10 @@ node_templates:
       package:
         package_type: container
         env:
-          - name: "CHASSIS_STAGE"
-            value: { get_input: chassis_stage }
+          - name: "CHASSIS_ENV"
+            value: { get_input: chassis_env }
           - name: "CSE_REGISTRY_ADDR"
             value: { get_input: cse_reg_addr }
-          - name: "CSE_CONFIG_CENTER_ADDR"
-            value: { get_input: cse_center_addr }
           - name: "CSE_CONFIG_CENTER_ADDR"
             value: { get_input: cse_center_addr }
           - name: "cse_service_registry_sslEnable"
