@@ -98,7 +98,7 @@ node_templates:
   bptest-host:
     type: hwpaas.nodes.Cluster
     properties:
-      name: sockshop-sukesh-nodelete
+      name: sockshop
       namespace: default
       instances: 1
   #frontend
