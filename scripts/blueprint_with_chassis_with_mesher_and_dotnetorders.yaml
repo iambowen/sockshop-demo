@@ -2,7 +2,7 @@ tosca_definitions_version: fusionstage_tosca_version_2_1
 
 inputs:
   image-frontend:
-    default: "100.125.0.198:20202/bigheadbird/sockshop-front-end:images1"
+    default: "100.125.0.198:20202/bigheadbird/sockshop-front-end:200"
   image-orders:
     default: "100.125.0.198:20202/bigheadbird/orders-dotnet:wt_sleep"
   image-payment:
