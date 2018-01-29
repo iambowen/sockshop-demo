@@ -5,20 +5,13 @@ service_description:
 cse:
   service:
     registry:
-      address: https://${SC_HOST}
-      instance:
-        watch: false
+      address: https://${SC_HOST}:30100
   config:
     client:
-      serverUri: https://${SC_HOST}
+      serverUri: https://${SC_HOST}:30103
   monitor:
     client:
-      serverUri: https://${SC_HOST}
-  credentials:
-    accessKey: ${AK_KEY}
-    secretKey: ${SK_KEY}
-    akskCustomCipher: default
-    enabled: true
+      serverUri: https://${SC_HOST}:30109
   rest:
     address: 0.0.0.0:7073
   grpc:
