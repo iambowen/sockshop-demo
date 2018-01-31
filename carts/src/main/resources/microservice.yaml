@@ -11,6 +11,8 @@ cse:
   config:
     client:
       serverUri: https://${SC_HOST}
+      refreshMode: 1
+      refresh_interval: 5000
   monitor:
     client:
       serverUri: https://${SC_HOST}

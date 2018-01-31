@@ -5,6 +5,11 @@ RUN mkdir -p $APP_ROOT
 RUN mkdir -p $LOG_ROOT
 
 COPY ./carts.jar $APP_ROOT
+COPY ./carts.sh $APP_ROOT
+
+
 RUN cd $APP_ROOT && chmod -R 770 .
-CMD ["/bin/sh","-c","java -jar /root/servicestage/carts/carts.jar >> $LOG_ROOT/carts.log"]
+RUN chmod +x /root/servicestage/carts/carts.sh
+
+ENTRYPOINT ["/root/servicestage/carts/carts.sh"]
 
