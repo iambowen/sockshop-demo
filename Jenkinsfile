@@ -27,7 +27,7 @@ pipeline {
                  steps{
                       echo 'Pushing Images to SWR'
                       sh 'docker login -u cn-north-1@UINZOXGKR7GQXBUVZGN0 -p 1ebee63f40f55d8b8a4346a486838161703dfd95532f44cf39cfd63ca3d4d472 registry.cn-north-1.huaweicloud.com'
-                      sh 'bash -x scripts/pipeline/push_image_swr.sh'
+                      sh 'bash -x scripts/push_image_swr.sh'
                  }
             }
         }
