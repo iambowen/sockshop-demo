@@ -2,7 +2,9 @@ search='<servicecomb.version>0.2.0'
 search1='<huaweicloud.version>2.1.11'
 replace='<servicecomb.version>0.5.0'
 replace1='<huaweicloud.version>2.2.31'
-cd pwd
+
+BASEDIR=$PWD
+
 for file in `find -maxdepth 1 -name 'pom.xml'`; do
   grep "$search" $file &> /dev/null
   if [ $? -ne 0 ]; then
@@ -13,12 +15,13 @@ for file in `find -maxdepth 1 -name 'pom.xml'`; do
   fi  
 done
 
+cd carts
 mvn clean install -Phuaweicloud -DskipTests
 chmod +x .
 
 #carts
 mkdir build_image_carts
-cp ./carts/target/carts.jar ./build_image_carts
+cp target/carts.jar ./build_image_carts
 cp ./makedocker/carts/Dockerfile ./build_image_carts
 cp ./makedocker/carts/carts.sh ./build_image_carts
 cd build_image_carts
