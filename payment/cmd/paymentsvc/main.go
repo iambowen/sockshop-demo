@@ -2,17 +2,17 @@ package main
 
 import (
 	"fmt"
+	"github.com/ServiceComb/go-chassis/core/lager"
 	"os"
 	"os/signal"
 	"syscall"
-	"github.com/ServiceComb/go-chassis/core/lager"
 	//"code.huawei.com/cse/go-chassis"
-	_ "github.com/ServiceComb/go-chassis/server/highway"
-	_ "github.com/ServiceComb/go-chassis/server/restful"
-	_ "github.com/ServiceComb/go-chassis/transport/tcp"
-	"github.com/ServiceComb/go-chassis/examples/payment"
-	"github.com/emicklei/go-restful/log"
 	"github.com/ServiceComb/go-chassis"
+	"github.com/ServiceComb/go-chassis/examples/payment"
+	_ "github.com/ServiceComb/go-chassis/server/restful"
+	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/server/highway"
+	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/transport/tcp"
+	"github.com/emicklei/go-restful/log"
 )
 
 const (
@@ -30,10 +30,10 @@ func main() {
 	var service payment.Service
 	{
 		service = payment.NewAuthorisationService(float32(declineAmount))
-		service = payment.LoggingMiddleware(logger,service)
+		service = payment.LoggingMiddleware(logger, service)
 
 	}
-	 chassis.RegisterSchema("rest", service)
+	chassis.RegisterSchema("rest", service)
 	chassis.Run()
 
 	// Capture interrupts.
@@ -42,5 +42,5 @@ func main() {
 		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
 		errc <- fmt.Errorf("%s", <-c)
 	}()
-	lager.Logger.Error("exit",<-errc)
+	lager.Logger.Error("exit", <-errc)
 }

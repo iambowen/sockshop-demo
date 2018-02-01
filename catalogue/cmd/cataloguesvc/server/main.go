@@ -6,19 +6,19 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/prometheus/client_golang/prometheus"
 	//"code.huawei.com/cse/go-chassis"
-	"github.com/ServiceComb/go-chassis/examples/catalogue"
 	"github.com/ServiceComb/go-chassis/core/lager"
 	"github.com/ServiceComb/go-chassis/core/registry"
+	"github.com/ServiceComb/go-chassis/examples/catalogue"
 	//"github.com/ServiceComb/go-chassis/core/server"
-	_ "github.com/ServiceComb/go-chassis/server/highway"
+	"github.com/ServiceComb/go-chassis"
 	_ "github.com/ServiceComb/go-chassis/server/restful"
-	_ "github.com/ServiceComb/go-chassis/transport/tcp"
+	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/server/highway"
+	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/transport/tcp"
 	"log"
 	"os"
 	"os/signal"
 	"path/filepath"
 	"syscall"
-	"github.com/ServiceComb/go-chassis"
 )
 
 const (
@@ -67,7 +67,7 @@ func main() {
 	mysql_user := os.Getenv("mysql_user")
 	mysql_db := os.Getenv("mysql_db")
 	mysql_password := os.Getenv("mysql_password")
-	dsn := mysql_user+":"+mysql_password+"@tcp("+mysql_ip+":"+mysql_port+")/"+mysql_db
+	dsn := mysql_user + ":" + mysql_password + "@tcp(" + mysql_ip + ":" + mysql_port + ")/" + mysql_db
 	if dsn == "" {
 		dsn = "root:@tcp(localhost:3306)/socksdb"
 	}

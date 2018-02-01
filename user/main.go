@@ -6,22 +6,20 @@ import (
 	"os/signal"
 	"syscall"
 
-	corelog "log"
+	"github.com/ServiceComb/go-chassis/core/lager"
 	"github.com/ServiceComb/go-chassis/examples/user/api"
 	"github.com/ServiceComb/go-chassis/examples/user/db"
 	"github.com/ServiceComb/go-chassis/examples/user/db/mongodb"
-	"github.com/ServiceComb/go-chassis/core/lager"
+	corelog "log"
 	//"code.huawei.com/cse/go-chassis"
 	"github.com/ServiceComb/go-chassis/core/registry"
-	_ "github.com/ServiceComb/go-chassis/server/highway"
 	_ "github.com/ServiceComb/go-chassis/server/restful"
-	_ "github.com/ServiceComb/go-chassis/transport/tcp"
+	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/server/highway"
+	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/transport/tcp"
 	//"github.com/ServiceComb/go-chassis/core/server"
-	"github.com/ServiceComb/go-chassis/examples/user/users"
 	"github.com/ServiceComb/go-chassis"
+	"github.com/ServiceComb/go-chassis/examples/user/users"
 )
-
-
 
 const (
 	ServiceName = "user"
@@ -34,7 +32,8 @@ func init() {
 
 func main() {
 
-	err := chassis.Init();if err != nil {
+	err := chassis.Init()
+	if err != nil {
 		corelog.Panicln(err)
 	}
 	registry.Enable()
