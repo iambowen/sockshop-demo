@@ -5,6 +5,11 @@ RUN mkdir -p $APP_ROOT
 RUN mkdir -p $LOG_ROOT
 
 COPY ./orders.jar $APP_ROOT
+COPY ./orders.sh $APP_ROOT
+
+
 RUN cd $APP_ROOT && chmod -R 770 .
-CMD ["/bin/sh","-c","java -jar /root/servicestage/orders/orders.jar >> $LOG_ROOT/orders.log"]
+RUN chmod +x /root/servicestage/orders/orders.sh
+
+ENTRYPOINT ["/root/servicestage/orders/orders.sh"]
 
