@@ -24,7 +24,7 @@ echo "gvt restore success"
 
 echo "catalogue started"
 
-cd $BASEDIR/sockshop-demo
+cd $BASEDIR
 cp -r catalogue $WORKDIR/go-chassis/examples/
 
 cd $WORKDIR/go-chassis/examples/catalogue/cmd/cataloguesvc/server/
@@ -52,7 +52,7 @@ echo "**********************"
 
 echo "payment started"
 
-cd $BASEDIR/sockshop-demo
+cd $BASEDIR
 
 cp -r payment $WORKDIR/go-chassis/examples/
 
@@ -80,7 +80,7 @@ echo "**********************"
 
 echo "user started"
 
-cd $BASEDIR/sockshop-demo
+cd $BASEDIR
 
 cp -r user $WORKDIR/go-chassis/examples/
 
