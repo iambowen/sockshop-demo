@@ -12,7 +12,7 @@ import (
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"log"
-	"strings"
+	//"strings"
 )
 
 var (
@@ -29,7 +29,8 @@ func init() {
 	flag.StringVar(&password, "mongo-password", os.Getenv("MONGO_PASS"), "Mongo password")
 	flag.StringVar(&host, "mongo-host", os.Getenv("MONGO_HOST"), "Mongo host")*/
 	name = os.Getenv("MONGO_USER");if name == ""{
-		name = "mongo-user"
+		//name = "mongo-user"
+		name=""
 	}
 	password=os.Getenv("MONGO_PASS");if password == ""{
 		password = "mongo-password"
@@ -50,10 +51,10 @@ func (m *Mongo) Init() error {
 	u := getURL()
 	var err error
 	url := u.String()
-	result := strings.Replace(url, "@", "/", -1)
-	log.Print("URL for mongo db connection : ",result)
+	//result := strings.Replace(url, "@", "/", -1)
+	log.Print("URL for mongo db connection : ",url)
 
-	m.Session, err = mgo.DialWithTimeout(result, time.Duration(5)*time.Second)
+	m.Session, err = mgo.DialWithTimeout(url, time.Duration(5)*time.Second)
 
 	if err != nil {
 		return err
