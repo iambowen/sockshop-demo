@@ -26,7 +26,7 @@ cp ../makedocker/carts/Dockerfile build_image_carts
 cp ../makedocker/carts/carts.sh build_image_carts
 cd build_image_carts
 docker build -t carts:autobuild .
-docker tag carts:autobuild registry.cn-north-1.huaweicloud.com/bigheadbird/sockshop-carts:latest
+docker tag carts:autobuild registry.cn-north-1.huaweicloud.com/hwcse/sockshop-carts:latest
 cd ../..
 
 cd orders
@@ -37,7 +37,7 @@ cp ../makedocker/orders/Dockerfile build_image_orders
 cp ../makedocker/orders/orders.sh build_image_orders
 cd build_image_orders
 docker build -t orders:autobuild .
-docker tag orders:autobuild registry.cn-north-1.huaweicloud.com/bigheadbird/sockshop-orders:latest
+docker tag orders:autobuild registry.cn-north-1.huaweicloud.com/hwcse/sockshop-orders:latest
 cd ../..
 
 cd shipping
@@ -48,5 +48,5 @@ cp ../makedocker/shipping/Dockerfile build_image_shipping
 cp ../makedocker/shipping/shipping.sh build_image_shipping
 cd build_image_shipping
 docker build -t shipping:autobuild .
-docker tag shipping:autobuild registry.cn-north-1.huaweicloud.com/bigheadbird/sockshop-shipping:latest
+docker tag shipping:autobuild registry.cn-north-1.huaweicloud.com/hwcse/sockshop-shipping:latest
 cd ..
