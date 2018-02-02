@@ -15,8 +15,10 @@ for file in `find -maxdepth 1 -name 'pom.xml'`; do
   fi  
 done
 
-cd carts
+set -e
+
 mvn clean install -Phuaweicloud -DskipTests
+cd carts
 chmod +x .
 
 #carts
