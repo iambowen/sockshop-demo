@@ -29,6 +29,21 @@ check_metricenv_exist() {
     fi
 }
 
+check_config_files(){
+
+    copy_tmp2user chassis.yaml
+
+}
+
+copy_tmp2user(){
+    tmp="/tmp"
+    user_conf="/app/user/conf"
+    if [ -f $tmp/$1 ]; then
+        echo "$1 exists"
+        cp -f $tmp/$1 $user_conf/$1
+    fi
+}
+
 #////////////////////////////////////////////////////#
 #          go SDK                                   #
 #///////////////////////////////////////////////////#
@@ -36,6 +51,7 @@ check_metricenv_exist() {
 check_env_exist "CSE_SERVICE_CENTER" $CSE_SERVICE_CENTER
 check_ccenv_exist "CSE_CONFIG_CENTER_ADDR" $CSE_CONFIG_CENTER_ADDR
 check_metricenv_exist "CSE_MONITOR_SERVER_ADDR" $CSE_MONITOR_SERVER_ADDR
+check_config_files
 
 #name=app/user
 #echo $(env)
