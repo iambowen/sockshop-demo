@@ -44,7 +44,7 @@ TAG=latest
 docker build -t $IMAGE:$TAG .
 docker save -o $IMAGE:$TAG.tar $IMAGE:$TAG
 
-docker tag $IMAGE:$TAG registry.cn-north-1.huaweicloud.com/bigheadbird/sockshop-catalogue:$TAG
+docker tag $IMAGE:$TAG registry.cn-north-1.huaweicloud.com/hwcse/sockshop-catalogue:$TAG
 echo "build images success for catalogue"
 
 echo "**********************"
@@ -70,7 +70,7 @@ TAG=latest
 docker build -t $IMAGE:$TAG .
 docker save -o $IMAGE:$TAG.tar $IMAGE:$TAG
 
-docker tag $IMAGE:$TAG registry.cn-north-1.huaweicloud.com/bigheadbird/sockshop-payment:$TAG
+docker tag $IMAGE:$TAG registry.cn-north-1.huaweicloud.com/hwcse/sockshop-payment:$TAG
 
 echo "build images success for payment"
 
@@ -99,7 +99,7 @@ TAG=latest
 docker build -t $IMAGE:$TAG .
 docker save -o $IMAGE:$TAG.tar $IMAGE:$TAG
 
-docker tag $IMAGE:$TAG registry.cn-north-1.huaweicloud.com/bigheadbird/sockshop-user:$TAG
+docker tag $IMAGE:$TAG registry.cn-north-1.huaweicloud.com/hwcse/sockshop-user:$TAG
 
 echo "build image success for user"
 
