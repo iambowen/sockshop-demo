@@ -3,6 +3,11 @@
 
 ## Steps to do before using blueprint.yaml
 
-- Update key.sh file with the values of ak sk and project id
+- Set the values for the environmental variables ak, sk and projectid
+  export AK = xxxxxxxxxxxxxxxxxxx
+  export SK = xxxxxxxxxxxxxxxxxxxx
+  export PID = xxxxxxxxxxxxxxxxxxxx
 
-- Run key.sh file so that all the values of ak, sk and projectid will be updated in the blueprint.yaml file
+- Run key.sh file
+
+- ak, sk and projectid will be updated in blueprint.yaml file
