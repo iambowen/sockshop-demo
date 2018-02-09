@@ -5,10 +5,10 @@
 
 - Set the values for the environmental variables ak, sk and projectid
 ```
-export AK = xxxxxxxxxxxxxxxxxxx
-export SK = xxxxxxxxxxxxxxxxxxxx
-export PROJECTID = xxxxxxxxxxxxxxxxxxxx
-export MESHER_RELEASE = xxx
+export AK=xxxxxxxxxxxxxxxxxxx
+export SK=xxxxxxxxxxxxxxxxxxxx
+export PROJECTID=xxxxxxxxxxxxxxxxxxxx
+export MESHER_RELEASE=xxx
 ```
 - Run key.sh file
 ```
