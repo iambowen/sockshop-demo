@@ -4,7 +4,7 @@ search1='<huaweicloud.version>2.1.11'
 replace1='<huaweicloud.version>2.2.31'
 
 export JAVA_CHASSIS_VERSION=$java_chassis_version
-replace='<servicecomb.version>$JAVA_CHASSIS_VERSION'
+replace='<servicecomb.version>'$JAVA_CHASSIS_VERSION
 BASEDIR=$PWD
 
 for file in `find -maxdepth 1 -name 'pom.xml'`; do
