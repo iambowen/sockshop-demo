@@ -1,8 +1,10 @@
+#!/usr/bin/env bash
 search='<servicecomb.version>0.2.0'
 search1='<huaweicloud.version>2.1.11'
-replace='<servicecomb.version>0.5.0'
 replace1='<huaweicloud.version>2.2.31'
 
+export JAVA_CHASSIS_VERSION=params.java_chassis_version
+replace='<servicecomb.version>${JAVA_CHASSIS_VERSION}'
 BASEDIR=$PWD
 
 for file in `find -maxdepth 1 -name 'pom.xml'`; do
