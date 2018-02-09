@@ -19,6 +19,7 @@ mkdir -p $USER/user
 cd $WORKDIR
 git clone https://github.com/ServiceComb/go-chassis.git
 cd go-chassis
+env
 export CHECKOUT_VERSION=params.go_chassis_version
 if [ $CHECKOUT_VERSION == "latest" ]; then
     echo "using latest code"
