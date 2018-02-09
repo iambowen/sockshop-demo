@@ -5,7 +5,7 @@ pipeline {
         stage('Build Mesher-Microservice Image') {
             steps {
                 echo 'Building Mesher-Microservices Images'
-                echo ${something}
+                echo params.something
                 sh 'bash +x ../../dockerlogin.sh'
                 sh 'bash -x scripts/pipeline/mesher.sh'
             }
