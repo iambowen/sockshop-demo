@@ -25,7 +25,7 @@ chmod +x .
 
 #carts
 set +e
-rm -rf build_iamge_carts
+rm -rf build_image_carts
 set -e
 mkdir build_image_carts
 cp target/carts.jar ./build_image_carts
