@@ -7,7 +7,8 @@
 ```
 export AK = xxxxxxxxxxxxxxxxxxx
 export SK = xxxxxxxxxxxxxxxxxxxx
-export PID = xxxxxxxxxxxxxxxxxxxx
+export PROJECTID = xxxxxxxxxxxxxxxxxxxx
+export MESHER_RELEASE = xxx
 ```
 - Run key.sh file
 ```
