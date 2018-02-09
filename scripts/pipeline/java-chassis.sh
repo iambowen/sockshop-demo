@@ -4,7 +4,7 @@ search1='<huaweicloud.version>2.1.11'
 replace1='<huaweicloud.version>2.2.31'
 
 export JAVA_CHASSIS_VERSION=$java_chassis_version
-replace='<servicecomb.version>${JAVA_CHASSIS_VERSION}'
+replace='<servicecomb.version>$JAVA_CHASSIS_VERSION'
 BASEDIR=$PWD
 
 for file in `find -maxdepth 1 -name 'pom.xml'`; do
@@ -24,6 +24,9 @@ cd carts
 chmod +x .
 
 #carts
+set +e
+rm -rf build_iamge_carts
+set -e
 mkdir build_image_carts
 cp target/carts.jar ./build_image_carts
 cp ../makedocker/carts/Dockerfile build_image_carts
@@ -35,6 +38,9 @@ cd ../..
 
 cd orders
 #orders
+set +e
+rm -rf build_image_orders
+set -e
 mkdir build_image_orders
 cp ../orders/target/orders.jar build_image_orders
 cp ../makedocker/orders/Dockerfile build_image_orders
@@ -46,6 +52,9 @@ cd ../..
 
 cd shipping
 #shipping
+set +e
+rm -rf build_image_shipping
+set -e
 mkdir build_image_shipping
 cp ../shipping/target/shipping.jar build_image_shipping
 cp ../makedocker/shipping/Dockerfile build_image_shipping

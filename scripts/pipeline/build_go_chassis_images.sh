@@ -7,7 +7,9 @@ WORKDIR=$BASEDIR/src/github.com/ServiceComb
 CATALOGUE=$BASEDIR/cataloguedir
 PAYMENT=$BASEDIR/paymentdir
 USER=$BASEDIR/userdir
+set +e
 rm -rf $CATALOGUE $PAYMENT $USER $BASEDIR/src/
+set -e
 mkdir -p $WORKDIR
 mkdir -p $CATALOGUE
 mkdir -p $CATALOGUE/catalog
@@ -17,9 +19,11 @@ mkdir -p $USER
 mkdir -p $USER/user
 
 cd $WORKDIR
+set +e
+rm -rf go-chassis
+set -e
 git clone https://github.com/ServiceComb/go-chassis.git
 cd go-chassis
-env
 export CHECKOUT_VERSION=$go_chassis_version
 if [ $CHECKOUT_VERSION == "latest" ]; then
     echo "using latest code"
