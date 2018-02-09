@@ -31,11 +31,5 @@ pipeline {
                   sh 'bash -x scripts/pipeline/push_image_swr.sh'
              }
         }
-        stage('Update BluePrint') {
-            steps {
-                echo 'Updating the BluePrint in github...'
-                sh 'bash -x ../../jenkinsScript/updatebp.sh'
-            }
-        }
     }
 }
