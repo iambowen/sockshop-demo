@@ -4,7 +4,7 @@ ENV LOG_ROOT=/var/log/carts/
 RUN mkdir -p $APP_ROOT
 RUN mkdir -p $LOG_ROOT
 
-COPY ./targets/carts.jar $APP_ROOT
+COPY  /var/assembling/project/carts/target/carts.jar $APP_ROOT
 COPY ./carts.sh $APP_ROOT
 
 
