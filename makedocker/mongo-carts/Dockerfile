@@ -1,1 +1,1 @@
-FROM 100.125.0.198:20202/msa/sockshop-mongodb:1.0.0	
+FROM registry.cn-north-1.huaweicloud.com/msa/sockshop-mongodb:1.0.0	
