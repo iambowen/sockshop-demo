@@ -4,8 +4,8 @@ ENV LOG_ROOT=/var/log/carts/
 RUN mkdir -p $APP_ROOT
 RUN mkdir -p $LOG_ROOT
 
-COPY  /var/assembling/project/carts/target/carts.jar $APP_ROOT
-COPY ./carts.sh $APP_ROOT
+COPY  ./carts/target/carts.jar $APP_ROOT
+COPY ./carts/carts.sh $APP_ROOT
 
 
 RUN cd $APP_ROOT && chmod -R 770 .
