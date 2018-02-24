@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
+FROM registry.cn-north-1.huaweicloud.com/msa/openjdk:8-jre-alpine
 ENV APP_ROOT=/root/servicestage/carts/
 ENV LOG_ROOT=/var/log/carts/
 RUN mkdir -p $APP_ROOT
