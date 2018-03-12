@@ -114,8 +114,13 @@
 			<version>0.8.4</version>
 			<scope>test</scope>
 		</dependency>
-
-
+		<!-- https://mvnrepository.com/artifact/au.com.dius/pact-jvm-consumer-junit -->
+		<dependency>
+			<groupId>au.com.dius</groupId>
+			<artifactId>pact-jvm-consumer-junit_2.12</artifactId>
+			<version>3.5.13</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
