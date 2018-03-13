@@ -43,7 +43,6 @@ public class ShippingConsumerTest extends ConsumerPactTestMk2 {
         return builder.given("shippment of order sent.")
                 .uponReceiving("shippment request from order service")
                 .path("/shipping?username=consumerA")
-//                .query("username=consumerA")
                 .method("POST")
                 .body(requestBody)
                 .willRespondWith()
