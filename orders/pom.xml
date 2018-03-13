@@ -125,6 +125,12 @@
 
 	<build>
 		<finalName>orders</finalName>
+		<plugin>
+			<groupId>au.com.dius</groupId>
+			<artifactId>pact-jvm-provider-maven_2.12</artifactId>
+			<version>3.5.11</version>
+		</plugin>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
