@@ -135,6 +135,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
 				<configuration>
+					<systemPropertyVariables>
+						<pact.rootDir>pactfiles</pact.rootDir>
+					</systemPropertyVariables>
 					<includes>
 						<include>**/Unit*.java</include>
 					</includes>
