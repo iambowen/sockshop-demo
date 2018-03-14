@@ -1,0 +1,13 @@
+version: '3'
+services:
+  shipping:
+    build: .
+    container_name: "shipping-service"
+    ports:
+      - "7073:7073"
+    environment:
+      - SC_HOST=servicecenter:30100
+    links:
+      - servicecenter:servicecenter
+  servicecenter:
+

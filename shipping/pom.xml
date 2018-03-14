@@ -169,6 +169,21 @@
 				<artifactId>coveralls-maven-plugin</artifactId>
 				<version>4.2.0</version>
 			</plugin>
+			<plugin>
+				<groupId>au.com.dius</groupId>
+				<artifactId>pact-jvm-provider-maven_2.12</artifactId>
+				<version>3.5.11</version>
+				<configuration>
+					<serviceProviders>
+						<serviceProvider>
+							<name>shipping-service</name>
+							<pactBroker>
+								<url>http://114.115.183.226:8888/</url>
+							</pactBroker>
+						</serviceProvider>
+					</serviceProviders>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
