@@ -8,36 +8,36 @@ cse:
       address: https://${SC_HOST}
       instance:
         watch: false
-  config:
-    client:
-      serverUri: https://${SC_HOST}
-      refreshMode: 1
-      refresh_interval: 5000
-  monitor:
-    client:
-      serverUri: https://${SC_HOST}
-  credentials:
-    accessKey: ${AK_KEY}
-    secretKey: ${SK_KEY}
-    akskCustomCipher: default
-    enabled: true
+#  config:
+#    client:
+#      serverUri: https://${SC_HOST}
+#      refreshMode: 1
+#      refresh_interval: 5000
+#  monitor:
+#    client:
+#      serverUri: https://${SC_HOST}
+#  credentials:
+#    accessKey: ${AK_KEY}
+#    secretKey: ${SK_KEY}
+#    akskCustomCipher: default
+#    enabled: true
   rest:
     address: 0.0.0.0:7073
   grpc:
     address: 0.0.0.0:9090
   highway:
     address: 0.0.0.0:7070?sslEnabled=false
-  handler:
-    chain:
-      Provider:
-        default: bizkeeper-provider,perf-stats
-      Consumer:
-        default: loadbalance,bizkeeper-consumer,perf-stats
-  loadbalance:
-    serverListFilters: darklaunch
-    serverListFilter:
-      darklaunch:
-        className: com.huawei.paas.darklaunch.DarklaunchServerListFilter
+#  handler:
+#    chain:
+#      Provider:
+#        default: bizkeeper-provider,perf-stats
+#      Consumer:
+#        default: loadbalance,bizkeeper-consumer,perf-stats
+#  loadbalance:
+#    serverListFilters: darklaunch
+#    serverListFilter:
+#      darklaunch:
+#        className: com.huawei.paas.darklaunch.DarklaunchServerListFilter
   dms:
     service:
       endpoint:

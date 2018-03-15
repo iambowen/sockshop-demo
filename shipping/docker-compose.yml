@@ -4,10 +4,12 @@ services:
     build: .
     container_name: "shipping-service"
     ports:
-      - "7073:7073"
+      - "8080:7073"
     environment:
       - SC_HOST=servicecenter:30100
     links:
       - servicecenter:servicecenter
   servicecenter:
-
+    image: servicecomb/service-center
+    ports:
+      - "30100:30100"
