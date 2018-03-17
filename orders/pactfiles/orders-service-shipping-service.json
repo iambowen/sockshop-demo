@@ -10,9 +10,14 @@
             "description": "shippment request from order service",
             "request": {
                 "method": "POST",
-                "path": "/shipping?username=consumerA",
+                "path": "/shipping",
                 "headers": {
                     "Content-Type": "application/json; charset=UTF-8"
+                },
+                "query": {
+                    "username": [
+                        "consumerA"
+                    ]
                 },
                 "body": {
                     "amount": "8.0",
