@@ -50,10 +50,12 @@ public class ShippingConsumerTest extends ConsumerPactTestMk2 {
                 .path("/shipping")
                 .query("username=consumerA")
                 .method("POST")
+                .headers("Content-Type", "application/json")
                 .body(requestBody)
                 .willRespondWith()
-                .status(201)
+                .status(200)
                 .body(responseBody)
+                .matchHeader("Content-Type", "application/json", "application/json")
                 .toPact();
     }
 
@@ -82,15 +84,15 @@ public class ShippingConsumerTest extends ConsumerPactTestMk2 {
 
         HttpResponse response = Request.Post(uriBuilder.toString())
                             .body(new StringEntity(requestBody.toString()))
-                            .addHeader("Content-Type", "application/json;charset=UTF-8")
+                            .addHeader("Content-Type", "application/json")
                             .execute().returnResponse();
 
         String body = Request.Post(uriBuilder.toString())
                             .body(new StringEntity(requestBody.toString()))
-                            .addHeader("Content-Type", "application/json;charset=UTF-8")
+                            .addHeader("Content-Type", "application/json")
                             .execute().returnContent().toString();
 
-        assertEquals(201, response.getStatusLine().getStatusCode());
+        assertEquals(200, response.getStatusLine().getStatusCode());
         assertEquals(responseBody.toString(), body);
 
     }

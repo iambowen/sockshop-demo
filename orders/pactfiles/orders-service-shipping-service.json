@@ -12,7 +12,7 @@
                 "method": "POST",
                 "path": "/shipping",
                 "headers": {
-                    "Content-Type": "application/json; charset=UTF-8"
+                    "Content-Type": "application/json"
                 },
                 "query": {
                     "username": [
@@ -25,14 +25,30 @@
                 }
             },
             "response": {
-                "status": 201,
+                "status": 200,
                 "headers": {
-                    "Content-Type": "application/json; charset=UTF-8"
+                    "Content-Type": "application/json"
                 },
                 "body": {
                     "amount": "8.0",
                     "name": "shipment1",
                     "id": "d331083b-a1f4-4d61-ab59-14eed5e3fc7f"
+                },
+                "matchingRules": {
+                    "body": {
+                        
+                    },
+                    "header": {
+                        "Content-Type": {
+                            "matchers": [
+                                {
+                                    "match": "regex",
+                                    "regex": "application/json"
+                                }
+                            ],
+                            "combine": "AND"
+                        }
+                    }
                 }
             },
             "providerStates": [

@@ -133,7 +133,7 @@
 				<configuration>
 					<pactDirectory>pactfiles</pactDirectory> <!-- Defaults to ${project.build.directory}/pacts -->
 					<pactBrokerUrl>http://114.115.183.226:8888/</pactBrokerUrl>
-					<projectVersion>1.0.1</projectVersion> <!-- Defaults to ${project.version} -->
+					<projectVersion>1.0.108</projectVersion> <!-- Defaults to ${project.version} -->
 					<trimSnapshot>true</trimSnapshot> <!-- Defaults to false -->
 				</configuration>
 			</plugin>
