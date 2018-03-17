@@ -7,17 +7,17 @@ public class Shipment {
 
     private String name;
     
-    private float amount;
+    private String amount;
 
     public Shipment() {
         this("");
     }
 
     public Shipment(String name) {
-        this(UUID.randomUUID().toString(), name,4.99F);
+        this(UUID.randomUUID().toString(), name,"4.99");
     }
 
-    public Shipment(String id, String name, float amount) {
+    public Shipment(String id, String name, String amount) {
         this.id = id;
         this.name = name;
         this.amount = amount;
@@ -66,11 +66,11 @@ public class Shipment {
         this.name = name;
     }
 
-	public float getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(float amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 }

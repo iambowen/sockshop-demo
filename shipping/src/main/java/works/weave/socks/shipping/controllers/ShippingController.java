@@ -74,14 +74,15 @@ public class ShippingController {
         return "GET ALL Shipping Resource.";
     }
 
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getShippingById(@PathVariable String id) {
         return "GET Shipping Resource with id: " + id;
     }
 
+    @RequestMapping(path="/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/{username}", method = RequestMethod.POST)
-    public @ResponseBody Shipment postShipping(@RequestBody Shipment shipment,@PathVariable("username") String username) {
+    public Shipment addShipment(@RequestBody Shipment shipment, @RequestParam("username") String username) {
         System.out.println("Adding shipment to queue..."+username);
     /*    try {
             rabbitTemplate.convertAndSend("shipping-task", shipment);
@@ -92,11 +93,11 @@ public class ShippingController {
         }*/
         
         //connect to DMS to push the shippment-task
-        boolean bResult = creatQueueAndSendShipment(shipment);
-        if (!bResult) {
-            System.out.println("Some problem happend while adding to queue, Anyway accespting order");
-        }
-        shipment.setAmount((float) 4.99);
+//        boolean bResult = creatQueueAndSendShipment(shipment);
+//        if (!bResult) {
+//            System.out.println("Some problem happend while adding to queue, Anyway accespting order");
+//        }
+        shipment.setId("d331083b-a1f4-4d61-ab59-14eed5e3fc7f");
         return shipment;
     }
 

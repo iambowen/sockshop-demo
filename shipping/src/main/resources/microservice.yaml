@@ -5,7 +5,7 @@ service_description:
 cse:
   service:
     registry:
-      address: https://${SC_HOST}
+      address: http://${SC_HOST}
       instance:
         watch: false
 #  config:
@@ -22,7 +22,7 @@ cse:
 #    akskCustomCipher: default
 #    enabled: true
   rest:
-    address: 0.0.0.0:7073
+    address: 0.0.0.0:8080
   grpc:
     address: 0.0.0.0:9090
   highway:
@@ -38,15 +38,15 @@ cse:
 #    serverListFilter:
 #      darklaunch:
 #        className: com.huawei.paas.darklaunch.DarklaunchServerListFilter
-  dms:
-    service:
-      endpoint:
-        url: https://${DMS_HOST}
-      region: ${DMS_REGION}
-      serviceName: paas
-      ak: ${DMS_AK}
-      sk: ${DMS_SK}
-      projectId: ${DMS_PROJECTID}
+#  dms:
+#    service:
+#      endpoint:
+#        url: https://${DMS_HOST}
+#      region: ${DMS_REGION}
+#      serviceName: paas
+#      ak: ${DMS_AK}
+#      sk: ${DMS_SK}
+#      projectId: ${DMS_PROJECTID}
   
 
 ssl.sc.consumer.sslOptionFactory: com.huawei.paas.foundation.auth.SSLOptionFactoryCloud
