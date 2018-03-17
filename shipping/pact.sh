@@ -2,7 +2,7 @@
 
 mvn clean package
 
-docker-compose up -d
+docker-compose up -d --build
 
 mvn pact:verify
 
