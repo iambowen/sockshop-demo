@@ -1,0 +1,19 @@
+version: '2'
+services:
+  carts:
+    build: .
+    ports:
+      - "7072:7072"
+    environment:
+      SC_HOST: "servicecenter:30100"
+      MONGODB_CARTS_SERVICE_HOST: "carts-db"
+    links:
+      - servicecenter:servicecenter
+      - carts-db:carts-db
+  carts-db:
+    image: iambowen/sockshop-mongo-carts
+  servicecenter:
+    image: servicecomb/service-center
+    ports:
+      - "30100:30100"
+
