@@ -1,14 +1,22 @@
 version: '2'
 
 services:
+  front-end:
+    image: front-end
   edge-router:
     image: weaveworksdemos/edge-router
     ports:
-      - '80:80'
+      - '8080:80'
     hostname: edge-router
     restart: always
     environment:
       - reschedule:on-node-failure
+    links:
+      - front-end:front-end
+      - catalogue:catalogue
+      - user:user
+      - carts:carts
+      - orders:orders
   catalogue:
     image: weaveworksdemos/catalogue
     hostname: catalogue
@@ -41,6 +49,8 @@ services:
     restart: always
     environment:
       - reschedule:on-node-failure
+    links:
+      - shipping:shipping
   orders-db:
     image: mongo
     hostname: orders-db

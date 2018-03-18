@@ -5,7 +5,6 @@ services:
     build:
         context: .
         dockerfile: ./Dockerfile
-    image: weaveworksdemos/catalogue-dev
     hostname: catalogue
     restart: always
     cap_drop:
@@ -27,7 +26,7 @@ services:
       - servicecenter:servicecenter
       - catalogue-db:mysql
     ports:
-        - "8080:80"
+        - "8082:8082"
   catalogue-db:
     build:
         context: ./docker/catalogue-db/
