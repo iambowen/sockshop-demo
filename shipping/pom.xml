@@ -178,7 +178,7 @@
 						<serviceProvider>
 							<name>shipping-service</name>
 							<pactBroker>
-								<url>http://114.115.183.226:8888/</url>
+								<url>http://localhost:8888/</url>
 							</pactBroker>
 						</serviceProvider>
 					</serviceProviders>
