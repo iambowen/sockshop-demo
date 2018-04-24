@@ -1,6 +1,6 @@
 {
     "provider": {
-        "name": "users-service"
+        "name": "user-service"
     },
     "consumer": {
         "name": "frontend-service"

@@ -1,9 +1,10 @@
+
 {
     "provider": {
-        "name": "catalogue-service"
+        "name": "carts-service"
     },
     "consumer": {
-        "name": "frontend-service"
+        "name": "orders-service"
     },
     "interactions": [
         {

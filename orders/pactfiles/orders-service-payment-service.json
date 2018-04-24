@@ -3,7 +3,7 @@
         "name": "payment-service"
     },
     "consumer": {
-        "name": "frontend-service"
+        "name": "orders-service"
     },
     "interactions": [
         {
