@@ -1,0 +1,27 @@
+version: '2'
+services:
+  frontend:
+    build:
+        context: .
+        dockerfile: ./Dockerfile
+    hostname: frontend
+    environment: 
+      SERVMESHER_SERVICE_HOST: "mesher"
+    links:
+      - mesher:mesher
+    ports:
+      - 8079:8079
+  servicecenter:
+    image: servicecomb/service-center:latest
+    ports:
+      - 30100:30100
+  mesher:
+    image: hwcse/cse-mesher
+    ports: 
+      - 30101:30101
+    links:
+      - servicecenter:servicecenter
+    environment: 
+      CSE_REGISTRY_ADDR: http://servicecenter:30100
+    volumes: 
+      - ./chassis.yml:/etc/mesher/conf/chassis.yml
