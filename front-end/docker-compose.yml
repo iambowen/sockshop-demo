@@ -25,3 +25,56 @@ services:
       CSE_REGISTRY_ADDR: http://servicecenter:30100
     volumes: 
       - ./chassis.yml:/etc/mesher/conf/chassis.yml
+  catalogue:
+    image: catalogue
+    hostname: catalogue
+    restart: always
+    read_only: false
+    environment:
+        - reschedule=on-node-failure
+        - CSE_SERVICE_CENTER=servicecenter:30100
+        - mysql_ip=mysql
+        - mysql_port=3306
+        - mysql_db=socksdb
+        - mysql_user=root
+        - mysql_password=password00
+    links:
+      - servicecenter:servicecenter
+      - catalogue-db:mysql
+    ports:
+        - "8082:8082"
+  catalogue-db:
+    image: catalogue-db
+    hostname: catalogue-db
+    environment:
+      - reschedule=on-node-failure
+      - MYSQL_ROOT_PASSWORD=password00
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=socksdb
+  carts:
+    image: carts
+    ports:
+      - "7072:7072"
+    environment:
+      SC_HOST: "servicecenter:30100"
+      MONGODB_CARTS_SERVICE_HOST: "carts-db"
+    links:
+      - servicecenter:servicecenter
+      - carts-db:carts-db
+  carts-db:
+    image: iambowen/sockshop-mongo-carts
+  orders:
+    image: orders
+    ports:
+      - "7071:7071"
+    environment:
+      SC_HOST: "servicecenter:30100"
+      MONGODB_ORDERS_SERVICE_HOST: "orders-db"
+      MESHER: mesher
+    links:
+      - servicecenter:servicecenter
+      - orders-db:orders-db
+      - mesher:mesher
+  orders-db:
+    image: mongo
+
