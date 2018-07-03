@@ -16,7 +16,7 @@ cse:
     registry:
       type: servicecenter           #optional:可选zookeeper/servicecenter，zookeeper供中软使用，不配置的情况下默认为servicecenter
       scope: full                   #optional:scope不为full时，只允许在本app间访问，不允许跨app访问；为full就是注册时允许跨app，并且发现本租户全部微服务
-      address: http://10.19.169.117:30100 
+      address: http://127.0.0.1:30100 
       #enableSSL: false
       #register: manual          optional：register不配置时默认为自动注册，可选参数有自动注册auto和手动注册manual
       refeshInterval : 30s
@@ -25,7 +25,7 @@ cse:
   protocols:
     highway:
       listenAddress: 0.0.0.0:9090
-      advertiseAddress: 172.17.0.8:8080
+      advertiseAddress: 172.17.0.8:9090
       transport: tcp #optional 指定加载那个传输层
     rest:
       listenAddress: 0.0.0.0:8088
