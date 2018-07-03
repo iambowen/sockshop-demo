@@ -1,112 +1,87 @@
-#User Service
-[![Build Status](https://travis-ci.org/microservices-demo/user.svg?branch=master)](https://travis-ci.org/microservices-demo/user)
-[![Coverage Status](https://coveralls.io/repos/github/microservices-demo/user/badge.svg?branch=master)](https://coveralls.io/github/microservices-demo/user?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/microservices-demo/user)](https://goreportcard.com/report/github.com/microservices-demo/user)
-[![](https://images.microbadger.com/badges/image/weaveworksdemos/user.svg)](http://microbadger.com/images/weaveworksdemos/user "Get your own image badge on microbadger.com")
+# 用户服务
 
-This service covers user account storage, to include cards and addresses
+用户服务(User Service)提供用户相关信息的管理。用户使用Golang，go-chassis框架开发，对外提供REST(8081端口)和highway（8080）端口，状态存储在Mongodb数据库中。用户服务的运行依赖注册中心以及Mongodb数据库。
 
-## Bugs, Feature Requests and Contributing
-We'd love to see community contributions. We like to keep it simple and use Github issues to track bugs and feature requests and pull requests to manage contributions.
+## API接口清单
 
->## API Spec
+ [API接口清单](http://microservices-demo.github.io/api/index?url=https://raw.githubusercontent.com/microservices-demo/user/master/apispec/user.json)
 
-Checkout the API Spec [here](http://microservices-demo.github.io/api/index?url=https://raw.githubusercontent.com/microservices-demo/user/master/apispec/user.json)
+## 开发环境准备
 
->## Build
-
-### Using Go natively
-
+* 安装Golang 1.8+ : `brew install golang`
+* 设置`GOPATH`环境变量：
 ```bash
-make build
+mkdir -p ~/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 ```
+* 安装`go-chassis`及相关的包: `./prepare.sh`
+* 安装docker/docker-compose: `brew cask install docker-toolbox`
 
-### Using Docker Compose
+## 构建和打包
 
+* 编译二进制：执行`make buildmac`，可以在`bin/`目录下生成名为`user`的二进制文件，如果是生成在容器中运行的二进制文件，执行`make build`即可。
+* 打包docker镜像：`make build && docker build -t user .`。
+
+## 本地运行用户服务
+
+通过docker-compose命令可以拉起注册中心、用户服务以及Mongodb数据库。数据库中会预置一些用户数据，准备的脚本在`docker/user-db/scripts`下面（测试用户脚本为`scripts/customer-insert.js`）。
+
+执行`docker-compose up -d`即可启动所有服务，通过以下接口确认用户服务是否正确运行并注册到注册中心：
+
+* 是否注册到注册中心：`curl -H "X-Domain-Name:default" http://127.0.0.1:30100/registry/v3/microservices  | jq -r`
+
+```json
+  {
+      "serviceId": "d7d192c37e7211e8b30c0242ac160002",
+      "appId": "sockshop",
+      "serviceName": "user",
+      "version": "0.0.1",
+      "level": "FRONT",
+      "status": "UP",
+      ...
+```
+* 是否有正常运行的实例：`  curl -X GET -H "X-ConsumerId: d7d192c37e7211e8b30c0242ac160002" -H "X-Tenant-Name: default" http://127.0.0.1:30100/registry/v3/microservices/d7d192c37e7211e8b30c0242ac160002/instances | jq -r`
+
+```json
+{
+  "instances": [
+    {
+      "instanceId": "4df052937e7511e8b30c0242ac160002",
+      "serviceId": "d7d192c37e7211e8b30c0242ac160002",
+      "endpoints": [
+        "rest://172.22.0.4:8081",
+        "highway://172.22.0.4:8080"
+      ],
+      "hostName": "user",
+      "status": "UP",
+      ...
+```
+> 原生的方式运行
 ```bash
-docker-compose build
+docker-compose up -d user-db servicecenter
+make buildmac
+CSE_SERVICE_CENTER=http://127.0.0.1:30100 ./bin/user -port=8080 -database=mongodb -mongo-host=localhost:27017
 ```
 
->## Test
+* 接口测试：
+    * 健康检查：`curl http://localhost:8080/health`
+    * 用户列表：`curl http://localhost:8080/customers`
 
-```bash
-make test
-```
+## CI任务
 
->## Run
+空缺，流水线在ServiceStage。
 
-### Natively
-```bash
-docker-compose up -d user-db
-./bin/user -port=8080 -database=mongodb -mongo-host=localhost:27017
-```
+## 环境访问
 
-### Using Docker Compose
-```bash
-docker-compose up
-```
+ * 测试环境
+ * 预生产环境
+ * 生产环境
 
->## Check
+## 监控
 
-```bash
-curl http://localhost:8080/health
-```
+* 监控Dashboard
 
->## Use
+## FAQ
 
-Test user account passwords can be found in the comments in `users-db-test/scripts/customer-insert.js`
-
-### Customers
-
-```bash
-curl http://localhost:8080/customers
-```
-
-### Cards
-```bash
-curl http://localhost:8080/cards
-```
-
-### Addresses
-
-```bash
-curl http://localhost:8080/addresses
-```
-
-### Login
-```bash
-curl http://localhost:8080/login
-```
-
-### Register
-
-```bash
-curl http://localhost:8080/register
-```
-
-## Push
-
-```bash
-make dockertravisbuild
-```
-
-## Test Zipkin
-
-To test with Zipkin
-
-```
-make
-docker-compose -f docker-compose-zipkin.yml build
-docker-compose -f docker-compose-zipkin.yml up
-```
-It takes about 10 seconds to seed data
-
-you should see it at:
-[http://localhost:9411/](http://localhost:9411)
-
-be sure to hit the "Find Traces" button.  You may need to reload the page.
-
-when done you can run:
-```
-docker-compose -f docker-compose-zipkin.yml down
-```
+常见问题

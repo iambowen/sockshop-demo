@@ -88,3 +88,7 @@ clean: cleandocker
 build: deps
 	mkdir -p bin
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -o bin/$(INSTANCE) main.go
+
+buildmac: deps
+	mkdir -p bin
+	CGO_ENABLED=0 go build -a -installsuffix cgo -o bin/$(INSTANCE) main.go
