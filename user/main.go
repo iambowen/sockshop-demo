@@ -7,18 +7,18 @@ import (
 	"syscall"
 
 	"github.com/ServiceComb/go-chassis/core/lager"
-	"github.com/ServiceComb/go-chassis/examples/user/api"
-	"github.com/ServiceComb/go-chassis/examples/user/db"
-	"github.com/ServiceComb/go-chassis/examples/user/db/mongodb"
+	"./api"
+	"./db"
+	"./db/mongodb"
 	corelog "log"
 	//"code.huawei.com/cse/go-chassis"
 	"github.com/ServiceComb/go-chassis/core/registry"
 	_ "github.com/ServiceComb/go-chassis/server/restful"
-	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/server/highway"
-	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/transport/tcp"
+	// _ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/server/highway"
+	// _ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/transport/tcp"
 	//"github.com/ServiceComb/go-chassis/core/server"
 	"github.com/ServiceComb/go-chassis"
-	"github.com/ServiceComb/go-chassis/examples/user/users"
+	"./users"
 )
 
 const (

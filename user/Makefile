@@ -4,7 +4,6 @@ INSTANCE = user
 TESTDB = weaveworkstestuserdb
 OPENAPI = $(INSTANCE)-testopenapi
 GROUP = weaveworksdemos
-
 TAG=$(TRAVIS_COMMIT)
 
 default: build
@@ -88,4 +87,4 @@ clean: cleandocker
 
 build: deps
 	mkdir -p bin
-	CGO_ENABLED=0 go build -a -installsuffix cgo -o bin/$(INSTANCE) main.go
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -o bin/$(INSTANCE) main.go

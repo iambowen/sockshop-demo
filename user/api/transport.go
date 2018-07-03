@@ -8,7 +8,7 @@ import (
 	"errors"
 	"net/http"
 	"strings"
-	"github.com/ServiceComb/go-chassis/examples/user/users"
+	"../users"
 	rf "github.com/ServiceComb/go-chassis/server/restful"
 	"github.com/emicklei/go-restful/log"
 )
@@ -19,8 +19,8 @@ var (
 
 // MakeHTTPHandler mounts the endpoints into a REST-y HTTP handler.
 
-func (s *fixedService) URLPatterns() []rf.Route {
-	return []rf.Route{
+func (s *fixedService) URLPatterns() []rf.RouteSpec {
+	return []rf.RouteSpec {
 		{http.MethodGet, "/login", "LoginEndpoint"},
 		{http.MethodPost,"/register", "RegisterEndpoint"},
 		{http.MethodGet, "/customers", "UserGetEndpoint"},

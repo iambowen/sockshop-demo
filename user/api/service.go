@@ -9,9 +9,8 @@ import (
 	"fmt"
 	"io"
 	"time"
-
-	"github.com/ServiceComb/go-chassis/examples/user/db"
-	"github.com/ServiceComb/go-chassis/examples/user/users"
+	"../db"
+	"../users"
 	"log"
 )
 

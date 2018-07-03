@@ -7,8 +7,8 @@ package api
 import (
 	"context"
 	stdopentracing "github.com/opentracing/opentracing-go"
-	"github.com/ServiceComb/go-chassis/examples/user/db"
-	"github.com/ServiceComb/go-chassis/examples/user/users"
+	"../db"
+	"../users"
 )
 
 // Endpoints collects the endpoints that comprise the Service.

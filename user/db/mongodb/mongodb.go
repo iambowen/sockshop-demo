@@ -6,13 +6,11 @@ import (
 	"net/url"
 	"os"
 	"time"
-
-	"github.com/ServiceComb/go-chassis/examples/user/users"
-
+	"../../users"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"log"
-	"strings"
+	// "strings"
 )
 
 var (
@@ -50,10 +48,13 @@ func (m *Mongo) Init() error {
 	u := getURL()
 	var err error
 	url := u.String()
-	result := strings.Replace(url, "@", "/", -1)
-	log.Print("URL for mongo db connection : ",result)
+	
+	log.Print("URL for mongo db connection : ",url)
 
-	m.Session, err = mgo.DialWithTimeout(result, time.Duration(5)*time.Second)
+	// result := strings.Replace(url, "@", "/", -1)
+	// log.Print("URL for mongo db connection : ",result)
+
+	m.Session, err = mgo.DialWithTimeout(url, time.Duration(5)*time.Second)
 
 	if err != nil {
 		return err
@@ -448,7 +449,7 @@ func (m *Mongo) Delete(entity, id string) error {
 func getURL() url.URL {
 	ur := url.URL{
 		Scheme: "mongodb",
-		//Host:   host,
+		Host:   host,
 		Path:   db,
 	}
 	if name != "" {

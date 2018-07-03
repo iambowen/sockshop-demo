@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ServiceComb/go-chassis/examples/user/users"
+	"../users"
 	//"log"
 )
 
