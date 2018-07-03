@@ -12,8 +12,8 @@ import (
 
 // MakeHTTPHandler mounts the endpoints into a REST-y HTTP handler.
 
-func (s *loggingMiddleware) URLPatterns() []rf.Route {
-	return []rf.Route{
+func (s *loggingMiddleware) URLPatterns() []rf.RouteSpec {
+	return []rf.RouteSpec{
 		{http.MethodPost, "/paymentAuth", "AuthoriseEndpoint"},
 		{http.MethodGet, "/health", "HealthEndpoint"},
 		{http.MethodGet,"/coupon/{couponid}","ApplyCouponIdEndpoint"},

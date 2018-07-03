@@ -6,12 +6,11 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	//"code.huawei.com/cse/go-chassis"
 	"github.com/ServiceComb/go-chassis"
-	"github.com/ServiceComb/go-chassis/examples/payment"
+	"./payment"
 	_ "github.com/ServiceComb/go-chassis/server/restful"
-	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/server/highway"
-	_ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/transport/tcp"
+	// _ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/server/highway"
+	// _ "github.com/ServiceComb/go-chassis/third_party/forked/go-micro/transport/tcp"
 	"github.com/emicklei/go-restful/log"
 )
 

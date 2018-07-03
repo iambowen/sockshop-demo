@@ -1,7 +1,4 @@
 ---
-#region:
-#  name: us-east
-#  availableZone: us-east-1
 #微服务的公共属性
 APPLICATION_ID: sockshop
 
@@ -31,8 +28,8 @@ cse:
       advertiseAddress: 172.17.0.8:8080
       transport: tcp #optional 指定加载那个传输层
     rest:
-      listenAddress: 0.0.0.0:8081
-      advertiseAddress: 172.17.0.8:8081
+      listenAddress: 0.0.0.0:8088
+      advertiseAddress: 172.17.0.8:8088
       transport: tcp #optional 指定加载那个传输层
   handler:
     chain:
